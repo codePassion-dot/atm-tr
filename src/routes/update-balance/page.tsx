@@ -20,7 +20,7 @@ const UpdateBalance = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: updateBalance,
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });

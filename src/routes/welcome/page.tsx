@@ -20,7 +20,7 @@ const Welcome: React.FC = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: setLoggedUser,
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });

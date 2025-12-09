@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: logOut,
-    onSuccess: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
