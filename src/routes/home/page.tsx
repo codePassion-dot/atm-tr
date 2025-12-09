@@ -6,9 +6,9 @@ import {
   AtmShellLayout,
   AtmShellScreen,
   AtmShellScreenLayout,
-} from "../../atm-shell";
-import CreditCardList from "../../credit-card-list";
-import { useUser } from "../../use-user";
+} from "../../components/atm-shell";
+import CreditCardList from "../../components/credit-card-list";
+import { useUser } from "../../hooks";
 import { logOut } from "../../server";
 import { useNavigate } from "react-router";
 import { getButtonLabels, getButtonProps } from "../../utils";

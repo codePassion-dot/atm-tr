@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, type PropsWithChildren } from "react";
-import { cn } from "./utils";
-import { useUser } from "./use-user";
 import { useLocation } from "react-router";
+import { cn } from "../utils";
+import { useUser } from "../hooks";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isRight?: boolean;

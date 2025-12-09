@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router";
-import { useUser } from "./use-user";
+import { useUser } from "../hooks";
 import { useEffect } from "react";
 
 const Layout: React.FC = () => {

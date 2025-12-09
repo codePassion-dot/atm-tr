@@ -1,5 +1,5 @@
-import { cn } from "./utils";
-import { useUser } from "./use-user";
+import { useUser } from "../hooks";
+import { cn } from "../utils";
 
 const cardOptions = [
   { id: "star", left: 0, width: 44 },

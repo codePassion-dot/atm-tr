@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
 import Welcome from "./routes/welcome/page";
-import Layout from "./layout";
+import Layout from "./components/layout";
 import Home from "./routes/home/page";
 import Balance from "./routes/balance/page";
 import UpdateBalance from "./routes/update-balance/page";

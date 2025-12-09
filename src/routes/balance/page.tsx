@@ -6,10 +6,10 @@ import {
   AtmShellLayout,
   AtmShellScreen,
   AtmShellScreenLayout,
-} from "../../atm-shell";
-import CreditCardList from "../../credit-card-list";
+} from "../../components/atm-shell";
+import CreditCardList from "../../components/credit-card-list";
 import { getButtonLabels, getButtonProps } from "../../utils";
-import { useUser } from "../../use-user";
+import { useUser } from "../../hooks";
 
 const Balance = () => {
   const navigate = useNavigate();

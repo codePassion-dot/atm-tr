@@ -1,4 +1,4 @@
-import CreditCardList from "../../credit-card-list";
+import CreditCardList from "../../components/credit-card-list";
 import {
   AtmShellScreen,
   AtmShellLayout,
@@ -6,14 +6,14 @@ import {
   AtmShellButtonLabelList,
   AtmShellScreenLayout,
   AtmShellButtonLabelListLayout,
-} from "../../atm-shell";
+} from "../../components/atm-shell";
 import { PinInput } from "./pin-input";
 import { setLoggedUser } from "../../server";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { getButtonLabels, getButtonProps } from "../../utils";
 import { useEffect } from "react";
-import { useUser } from "../../use-user";
+import { useUser } from "../../hooks";
 
 const Welcome: React.FC = () => {
   const queryClient = useQueryClient();

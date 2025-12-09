@@ -6,12 +6,12 @@ import {
   AtmShellLayout,
   AtmShellScreen,
   AtmShellScreenLayout,
-} from "../../atm-shell";
+} from "../../components/atm-shell";
 import { getButtonLabels, getButtonProps } from "../../utils";
-import CreditCardList from "../../credit-card-list";
+import CreditCardList from "../../components/credit-card-list";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBalance } from "../../server";
-import NumberInput from "../../number-input";
+import NumberInput from "../../components/number-input";
 
 const UpdateBalance = () => {
   const navigate = useNavigate();
