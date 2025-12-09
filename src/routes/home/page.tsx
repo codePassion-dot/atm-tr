@@ -30,7 +30,7 @@ const Home: React.FC = () => {
       },
     });
   };
-  const buttons = [
+  const buttonsRight = [
     {
       id: "R1",
       buttonProps: {
@@ -40,7 +40,11 @@ const Home: React.FC = () => {
     },
     {
       id: "R2",
-      buttonProps: {},
+      buttonProps: {
+        onClick: () => {
+          navigate("/balance");
+        },
+      },
       label: "Balance",
     },
     {
@@ -51,9 +55,32 @@ const Home: React.FC = () => {
       label: "Re-Enter PIN",
     },
   ];
+  const buttonsLeft = [
+    {
+      id: "L2",
+      buttonProps: {
+        onClick: () => {
+          navigate("/withdraw");
+        },
+      },
+      label: "Withdraw",
+    },
+    {
+      id: "L3",
+      buttonProps: {
+        onClick: () => {
+          navigate("/deposit");
+        },
+      },
+      label: "Deposit",
+    },
+  ];
   return (
     <AtmShellLayout>
-      <AtmShellButtonList position="left" />
+      <AtmShellButtonList
+        buttons={getButtonProps(buttonsLeft)}
+        position="left"
+      />
       <AtmShellScreenLayout>
         <CreditCardList />
         <AtmShellScreen>
@@ -63,13 +90,20 @@ const Home: React.FC = () => {
           <span className="text-white pl-1">Please make a choice...</span>
           <AtmShellButtonLabelListLayout>
             <AtmShellButtonLabelList
-              labels={getButtonLabels(buttons)}
+              labels={getButtonLabels(buttonsLeft)}
+              position="left"
+            />
+            <AtmShellButtonLabelList
+              labels={getButtonLabels(buttonsRight)}
               position="right"
             />
           </AtmShellButtonLabelListLayout>
         </AtmShellScreen>
       </AtmShellScreenLayout>
-      <AtmShellButtonList buttons={getButtonProps(buttons)} position="right" />
+      <AtmShellButtonList
+        buttons={getButtonProps(buttonsRight)}
+        position="right"
+      />
     </AtmShellLayout>
   );
 };

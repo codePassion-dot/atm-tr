@@ -12,6 +12,8 @@ import { setLoggedUser } from "../../server";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { getButtonLabels, getButtonProps } from "../../utils";
+import { useEffect } from "react";
+import { useUser } from "../../use-user";
 
 const Welcome: React.FC = () => {
   const queryClient = useQueryClient();
@@ -21,7 +23,13 @@ const Welcome: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
+  const user = useUser();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!user.isFetching && user.data) {
+      navigate("/home");
+    }
+  }, [navigate, user.data, user.isFetching]);
 
   const buttons = [
     {

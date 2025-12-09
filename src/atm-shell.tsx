@@ -1,5 +1,7 @@
 import { type ButtonHTMLAttributes, type PropsWithChildren } from "react";
 import { cn } from "./utils";
+import { useUser } from "./use-user";
+import { useLocation } from "react-router";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isRight?: boolean;
@@ -45,7 +47,6 @@ interface AtmShellButtonLabelListProps {
   labels: string[];
   position: "right" | "left";
 }
-
 const AtmShellButtonLabelList: React.FC<AtmShellButtonLabelListProps> = ({
   labels = [],
   position,
@@ -63,7 +64,13 @@ const AtmShellButtonLabelList: React.FC<AtmShellButtonLabelListProps> = ({
           <span className="text-white text-nowrap">{label}</span>
         );
         return (
-          <div key={label} className="flex h-7 items-center self-end gap-1">
+          <div
+            key={label}
+            className={cn(
+              "flex h-7 items-center gap-1",
+              position === "right" ? "self-end" : "self-start",
+            )}
+          >
             {position === "right" ? (
               <>
                 {labelJsx}
@@ -87,9 +94,32 @@ const AtmShellScreenLayout: React.FC<PropsWithChildren> = ({ children }) => {
 };
 
 const AtmShellScreen: React.FC<PropsWithChildren> = ({ children }) => {
+  const user = useUser();
+  const location = useLocation();
   return (
     <div className="w-[380px] flex flex-col relative h-[340px] outline-4 outline-gray-200 self-stretch bg-blue-300">
-      {children}
+      {user.isFetching ||
+      (!user.data && location.pathname !== "/") ||
+      (user.data && location.pathname === "/") ? (
+        <div className="flex justify-center items-center flex-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="animate-spin text-white"
+          >
+            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+          </svg>
+        </div>
+      ) : (
+        children
+      )}
       <img src="./sticker_graf.png" className="absolute -bottom-25 -left-10" />
     </div>
   );
