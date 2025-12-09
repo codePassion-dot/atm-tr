@@ -11,7 +11,7 @@ import { getButtonLabels, getButtonProps } from "../../utils";
 import CreditCardList from "../../components/credit-card-list";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBalance } from "../../server";
-import NumberInput from "../../components/number-input";
+import NumberInput from "./number-input";
 
 const UpdateBalance = () => {
   const navigate = useNavigate();
