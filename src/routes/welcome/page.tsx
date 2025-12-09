@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { getButtonLabels, getButtonProps } from "../../utils";
 import { useEffect } from "react";
 import { useUser } from "../../hooks";
+import ErrorMessage from "../../components/error-message";
 
 const Welcome: React.FC = () => {
   const queryClient = useQueryClient();
@@ -62,8 +63,11 @@ const Welcome: React.FC = () => {
             <h1 className="text-white mx-3 font-bold text-xl text-center mt-5">
               Welcome to the ATM
             </h1>
-            <div className="flex justify-center items-center basis-xl">
-              <PinInput />
+            <div className="flex justify-center  items-center basis-xl">
+              <div className="flex flex-col gap-1">
+                <PinInput />
+                <ErrorMessage>{mutation.error?.message}</ErrorMessage>
+              </div>
             </div>
             <AtmShellButtonLabelListLayout>
               <AtmShellButtonLabelList

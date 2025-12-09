@@ -45,7 +45,7 @@ export const setLoggedUser = async (pin: string) => {
   if (!localStorageUser) {
     const user = seedUsers.find((user) => user.pin === pin);
     if (!user) {
-      throw new Error("user not found");
+      throw new Error("User not found");
     }
     localStorage.setItem(user.pin, JSON.stringify(user));
     localStorage.setItem(ACTIVE_USER, JSON.stringify(user));

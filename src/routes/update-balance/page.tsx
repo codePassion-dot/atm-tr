@@ -12,6 +12,7 @@ import CreditCardList from "../../components/credit-card-list";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBalance } from "../../server";
 import NumberInput from "./number-input";
+import ErrorMessage from "../../components/error-message";
 
 const UpdateBalance = () => {
   const navigate = useNavigate();
@@ -68,9 +69,7 @@ const UpdateBalance = () => {
             </h1>
             <div className="px-10 mt-3">
               <NumberInput />
-              <span className="text-gray-300 text-sm">
-                {mutation.error?.message}
-              </span>
+              <ErrorMessage>{mutation.error?.message}</ErrorMessage>
             </div>
             <AtmShellButtonLabelListLayout>
               <AtmShellButtonLabelList
