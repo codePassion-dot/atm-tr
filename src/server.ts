@@ -30,6 +30,8 @@ const seedUsers: User[] = [
   },
 ];
 
+const ACTIVE_USER = "active_user";
+
 const wait = (delay: number) =>
   new Promise((resolve) => {
     setTimeout(() => {
@@ -46,15 +48,15 @@ export const setLoggedUser = async (pin: string) => {
       throw new Error("user not found");
     }
     localStorage.setItem(user.pin, JSON.stringify(user));
-    localStorage.setItem("active_user", JSON.stringify(user));
+    localStorage.setItem(ACTIVE_USER, JSON.stringify(user));
   } else {
-    localStorage.setItem("active_user", localStorageUser);
+    localStorage.setItem(ACTIVE_USER, localStorageUser);
   }
 };
 
 export const getLoggedUser = async () => {
   await wait(300);
-  const localStorageUser = localStorage.getItem("active_user");
+  const localStorageUser = localStorage.getItem(ACTIVE_USER);
   if (!localStorageUser) {
     return null;
   }
@@ -63,5 +65,20 @@ export const getLoggedUser = async () => {
 
 export const logOut = async () => {
   await wait(300);
-  localStorage.removeItem("active_user");
+  localStorage.removeItem(ACTIVE_USER);
+};
+
+export const updateBalance = async (addition: number) => {
+  await wait(300);
+  const localStorageUser = localStorage.getItem(ACTIVE_USER);
+  if (!localStorageUser) {
+    throw new Error("not user found");
+  }
+  const jsonUser = JSON.parse(localStorageUser) as User;
+  if (jsonUser.balance + addition < 0) {
+    throw new Error("Insufficient Funds", { cause: "insufficient_founds" });
+  }
+  jsonUser.balance += addition;
+  localStorage.setItem(ACTIVE_USER, JSON.stringify(jsonUser));
+  localStorage.setItem(jsonUser.pin, JSON.stringify(jsonUser));
 };

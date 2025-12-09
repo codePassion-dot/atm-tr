@@ -17,7 +17,7 @@ const Balance = () => {
   const buttons = [
     {
       id: "R3",
-      label: "Ok",
+      label: "Back",
       buttonProps: {
         onClick: () => {
           navigate(-1);
