@@ -121,6 +121,7 @@ const AtmShellScreen: React.FC<PropsWithChildren> = ({ children }) => {
         children
       )}
       <img src="./sticker_graf.png" className="absolute -bottom-25 -left-10" />
+      <img src="./systems.png" className="absolute right-0 -bottom-4" />
     </div>
   );
 };

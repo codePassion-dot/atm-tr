@@ -17,7 +17,7 @@ const Layout: React.FC = () => {
           <img src="./atm_sign.png" />
           <img
             src="./graffiti.png"
-            className="absolute top-[37.5%] left-[45.3%] -translate-y-[37.5%]"
+            className="absolute top-[37.5%] left-[46.5%] -translate-y-[37.5%]"
           />
         </header>
         <div className="px-4 h-full">
