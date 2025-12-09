@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { cn } from "./utils";
+import { useUser } from "./use-user";
 
 const cardOptions = [
-  { id: "star", left: 0, width: 40 },
-  { id: "pulse", left: 51, width: 60 },
-  { id: "maestro", left: 120, width: 44 },
-  { id: "mastercard", left: 170, width: 46 },
-  { id: "plus", left: 220, width: 50 },
-  { id: "visa", left: 280, width: 40 },
+  { id: "star", left: 0, width: 44 },
+  { id: "pulse", left: 56, width: 72 },
+  { id: "maestro", left: 134, width: 60 },
+  { id: "mastercard", left: 200, width: 60 },
+  { id: "plus", left: 265, width: 55 },
+  { id: "visa", left: 325, width: 55 },
 ];
 
 const CreditCardList = () => {
-  const [selected, setSelected] = useState("visa");
+  const user = useUser();
 
   return (
     <div className="relative -mb-7 self-stretch inline-block">
@@ -22,7 +22,7 @@ const CreditCardList = () => {
       />
 
       {cardOptions.map((card) => {
-        const isSelected = card.id === selected;
+        const isSelected = card.id === user.data?.franchise;
 
         //NOTE: since all logos are part of the same image (sprite) there's no way of having individual semantic img elements
         return (

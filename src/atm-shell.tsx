@@ -1,40 +1,83 @@
-import type { PropsWithChildren } from "react";
+import { type ButtonHTMLAttributes, type PropsWithChildren } from "react";
 import { cn } from "./utils";
 
-interface ButtonProps {
-  isRight: boolean;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isRight?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ isRight }) => {
+const AtmShellButton: React.FC<ButtonProps> = ({
+  isRight = false,
+  onClick,
+  type,
+}) => {
+  const button = (
+    <button
+      onClick={onClick}
+      type={type ?? "button"}
+      className="bg-gray-400 border-y-2 border-b-gray-600 border-t-gray-100 rounded-md w-11 h-7"
+    />
+  );
+  const line = <div className="w-3.3 h-1.2 bg-gray-600"></div>;
   return (
     <div className="flex items-center">
-      {isRight && <div className="w-3.3 h-1.2 bg-gray-600"></div>}
-      <button className="bg-gray-400 border-y-2 border-b-gray-600 border-t-gray-100 rounded-md w-11 h-7"></button>
-      {!isRight && <div className="w-3.3 bg-gray-600 h-1.2"></div>}
+      {isRight ? (
+        <>
+          {line}
+          {button}
+        </>
+      ) : (
+        <>
+          {button}
+          {line}
+        </>
+      )}
     </div>
   );
 };
 
-const AtmShellButtonLabelContainer: React.FC<
-  PropsWithChildren & { isRight: boolean }
-> = ({ children, isRight }) => {
+const AtmShellButtonLabelListLayout: React.FC<PropsWithChildren> = ({
+  children,
+}) => {
+  return <div className="flex justify-between h-full">{children} </div>;
+};
+
+interface AtmShellButtonLabelListProps {
+  labels: string[];
+  position: "right" | "left";
+}
+
+const AtmShellButtonLabelList: React.FC<AtmShellButtonLabelListProps> = ({
+  labels = [],
+  position,
+}) => {
   return (
     <div
-      className={cn("flex flex-col gap-4 mt-auto pb-4", isRight && "self-end")}
+      className={cn(
+        "flex flex-col gap-4 mt-auto w-fit pb-4",
+        position === "right" && "mt-auto self-stretch ml-auto",
+      )}
     >
-      {children}{" "}
-    </div>
-  );
-};
-
-const AtmShellButtonLabel: React.FC<
-  PropsWithChildren & { isRight: boolean }
-> = ({ children, isRight }) => {
-  return (
-    <div className="flex h-7 items-center">
-      {!isRight && <div className="h-1.2 bg-white w-3.3" />}
-      <span className="text-white">{children}</span>
-      {isRight && <div className="h-1.2 bg-white w-3.3" />}
+      {labels.map((label) => {
+        const line = <div className="h-1.2 bg-white w-3.3" />;
+        const labelJsx = (
+          <span className="text-white text-nowrap">{label}</span>
+        );
+        return (
+          <div key={label} className="flex h-7 items-center self-end gap-1">
+            {position === "right" ? (
+              <>
+                {labelJsx}
+                {line}
+              </>
+            ) : (
+              <>
+                {line}
+                {labelJsx}
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -45,21 +88,44 @@ const AtmShellScreenLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
 const AtmShellScreen: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="w-[320px] flex flex-col relative h-[290px] outline-4 outline-gray-200 self-stretch bg-blue-300">
+    <div className="w-[380px] flex flex-col relative h-[340px] outline-4 outline-gray-200 self-stretch bg-blue-300">
       {children}
       <img src="./sticker_graf.png" className="absolute -bottom-25 -left-10" />
     </div>
   );
 };
 
-//NOTE: since we would be rendering always 4 buttons on each column there's no need to let the user compose them as the number is static
-const AtmShellButtons: React.FC<ButtonProps> = ({ isRight }) => {
+interface AtmShellButton {
+  id: string;
+  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+}
+
+//NOTE: children is now discourage for composition that's why I'm sending the buttons as props https://react.dev/reference/react/Children#accepting-an-array-of-objects-as-a-prop
+interface AtmShellButtonListProps {
+  buttons?: AtmShellButton[];
+  position: "right" | "left";
+}
+const AtmShellButtonList: React.FC<AtmShellButtonListProps> = ({
+  buttons = [],
+  position,
+}) => {
+  const allButtons = Array.from(
+    { length: 4 - buttons.length },
+    (_, idx): AtmShellButton => ({
+      id: `${position === "right" ? "R" : "L"}${idx}`,
+    }),
+  ).concat(buttons);
   return (
     <div className="flex self-end pb-4 gap-4 flex-col">
-      <Button isRight={isRight}></Button>
-      <Button isRight={isRight}></Button>
-      <Button isRight={isRight}></Button>
-      <Button isRight={isRight}></Button>
+      {allButtons.map((button) => {
+        return (
+          <AtmShellButton
+            key={button.id}
+            {...button.buttonProps}
+            isRight={position === "right"}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -70,9 +136,9 @@ const AtmShellLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
 export {
   AtmShellScreen,
-  AtmShellButtonLabelContainer,
-  AtmShellButtonLabel,
-  AtmShellButtons,
+  AtmShellButtonLabelList,
+  AtmShellButtonList,
   AtmShellLayout,
+  AtmShellButtonLabelListLayout,
   AtmShellScreenLayout,
 };
