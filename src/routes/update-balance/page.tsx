@@ -62,7 +62,11 @@ const UpdateBalance = () => {
         <AtmShellScreenLayout>
           <CreditCardList />
           <AtmShellScreen>
-            <div className="px-10 mt-20">
+            <h1 className="text-white mx-3 font-bold text-xl text-center mt-14">
+              Make a{" "}
+              {location.pathname === "/withdraw" ? "Withdrawal" : "Deposit"}
+            </h1>
+            <div className="px-10 mt-3">
               <NumberInput />
               <span className="text-gray-300 text-sm">
                 {mutation.error?.message}
