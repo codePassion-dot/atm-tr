@@ -54,35 +54,30 @@ const Welcome: React.FC = () => {
   };
 
   return (
-    <form action={handleSubmit}>
-      <AtmShellLayout>
-        <AtmShellButtonList position="left" />
-        <AtmShellScreenLayout>
-          <CreditCardList />
-          <AtmShellScreen>
-            <h1 className="text-white mx-3 font-bold text-xl text-center mt-5">
-              Welcome to the ATM
-            </h1>
-            <div className="flex justify-center  items-center basis-xl">
-              <div className="flex flex-col gap-1">
-                <PinInput />
-                <ErrorMessage>{mutation.error?.message}</ErrorMessage>
-              </div>
+    <AtmShellLayout as="form" action={handleSubmit}>
+      <AtmShellButtonList position="left" />
+      <AtmShellScreenLayout>
+        <CreditCardList />
+        <AtmShellScreen>
+          <h1 className="text-white mx-3 font-bold text-xl text-center mt-5">
+            Welcome to the ATM
+          </h1>
+          <div className="flex justify-center  items-center basis-xl">
+            <div className="flex flex-col gap-1">
+              <PinInput />
+              <ErrorMessage>{mutation.error?.message}</ErrorMessage>
             </div>
-            <AtmShellButtonLabelListLayout>
-              <AtmShellButtonLabelList
-                labels={getButtonLabels(buttons)}
-                position="right"
-              />
-            </AtmShellButtonLabelListLayout>
-          </AtmShellScreen>
-        </AtmShellScreenLayout>
-        <AtmShellButtonList
-          position="right"
-          buttons={getButtonProps(buttons)}
-        />
-      </AtmShellLayout>
-    </form>
+          </div>
+          <AtmShellButtonLabelListLayout>
+            <AtmShellButtonLabelList
+              labels={getButtonLabels(buttons)}
+              position="right"
+            />
+          </AtmShellButtonLabelListLayout>
+        </AtmShellScreen>
+      </AtmShellScreenLayout>
+      <AtmShellButtonList position="right" buttons={getButtonProps(buttons)} />
+    </AtmShellLayout>
   );
 };
 

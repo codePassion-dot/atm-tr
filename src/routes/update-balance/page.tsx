@@ -57,34 +57,29 @@ const UpdateBalance = () => {
     },
   ];
   return (
-    <form action={handleDeposit}>
-      <AtmShellLayout>
-        <AtmShellButtonList buttons={getButtonProps(buttons)} position="left" />
-        <AtmShellScreenLayout>
-          <CreditCardList />
-          <AtmShellScreen>
-            <h1 className="text-white mx-3 font-bold text-xl text-center mt-14">
-              Make a{" "}
-              {location.pathname === "/withdraw" ? "Withdrawal" : "Deposit"}
-            </h1>
-            <div className="px-10 mt-3">
-              <NumberInput />
-              <ErrorMessage>{mutation.error?.message}</ErrorMessage>
-            </div>
-            <AtmShellButtonLabelListLayout>
-              <AtmShellButtonLabelList
-                labels={getButtonLabels(buttons)}
-                position="right"
-              />
-            </AtmShellButtonLabelListLayout>
-          </AtmShellScreen>
-        </AtmShellScreenLayout>
-        <AtmShellButtonList
-          buttons={getButtonProps(buttons)}
-          position="right"
-        />
-      </AtmShellLayout>
-    </form>
+    <AtmShellLayout as="form" action={handleDeposit}>
+      <AtmShellButtonList buttons={getButtonProps(buttons)} position="left" />
+      <AtmShellScreenLayout>
+        <CreditCardList />
+        <AtmShellScreen>
+          <h1 className="text-white mx-3 font-bold text-xl text-center mt-14">
+            Make a{" "}
+            {location.pathname === "/withdraw" ? "Withdrawal" : "Deposit"}
+          </h1>
+          <div className="px-10 mt-3">
+            <NumberInput />
+            <ErrorMessage>{mutation.error?.message}</ErrorMessage>
+          </div>
+          <AtmShellButtonLabelListLayout>
+            <AtmShellButtonLabelList
+              labels={getButtonLabels(buttons)}
+              position="right"
+            />
+          </AtmShellButtonLabelListLayout>
+        </AtmShellScreen>
+      </AtmShellScreenLayout>
+      <AtmShellButtonList buttons={getButtonProps(buttons)} position="right" />
+    </AtmShellLayout>
   );
 };
 

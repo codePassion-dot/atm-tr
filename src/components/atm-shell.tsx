@@ -161,9 +161,27 @@ const AtmShellButtonList: React.FC<AtmShellButtonListProps> = ({
   );
 };
 
-const AtmShellLayout: React.FC<PropsWithChildren> = ({ children }) => {
-  return <div className="flex">{children}</div>;
-};
+interface PolymorphicAtmShellLayoutProps<T extends React.ElementType> {
+  as?: T;
+  children: React.ReactNode;
+}
+
+function AtmShellLayout<T extends React.ElementType = "div">({
+  children,
+  as,
+  ...rest
+}: PolymorphicAtmShellLayoutProps<T> &
+  Omit<
+    React.ComponentPropsWithRef<T>,
+    keyof PolymorphicAtmShellLayoutProps<T>
+  >) {
+  const Component = as ?? "div";
+  return (
+    <Component {...rest} className="flex">
+      {children}
+    </Component>
+  );
+}
 
 export {
   AtmShellScreen,
