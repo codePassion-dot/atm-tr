@@ -59,7 +59,7 @@ const Welcome: React.FC = () => {
         <AtmShellScreenLayout>
           <CreditCardList />
           <AtmShellScreen>
-            <h1 className="text-white mx-1 font-bold text-xl text-center mt-5">
+            <h1 className="text-white mx-3 font-bold text-xl text-center mt-5">
               Welcome to the ATM
             </h1>
             <div className="flex justify-center items-center basis-xl">
