@@ -4,8 +4,8 @@ import React, {
   type ChangeEvent,
   type KeyboardEvent,
 } from "react";
-import { cn } from "../../utils";
 
+import { cn } from "../../utils";
 interface PinInputProps {
   length?: number; // default 4
   onChange?: (pin: string) => void;
@@ -114,7 +114,7 @@ export const PinInput: React.FC<PinInputProps> = ({ length = 4, onChange }) => {
             "w-12 h-14 text-white text-center text-3xl",
             "border-b-2 border-gray-300",
             "bg-transparent",
-            "focus:outline-none focus:border-blue-500",
+            "focus:outline-none focus:border-blue-700",
           )}
         />
       ))}

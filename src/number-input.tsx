@@ -20,7 +20,7 @@ const NumberInput = () => {
       inputMode="decimal"
       value={value}
       onChange={handleChange}
-      className="w-full bg-transparent border-b-2 border-gray-400 text-white py-2 focus:outline-none focus:border-white transition-colors text-xl"
+      className="w-full bg-transparent border-b-2 border-white text-white py-2 focus:outline-none focus:border-blue-700 transition-colors text-xl"
     />
   );
 };
